@@ -12,8 +12,7 @@
     By example: --height-body
 */
 
-:root
-{
+:root {
     /* top */
     --top-logo: 2.188rem;
     --top-logo-description: 5.300rem;
@@ -49,12 +48,12 @@
     --top-explanation: 6.688rem;
 
     /* bottom */
-    --bottom-form-squares-grid:  0.813rem;
+    --bottom-form-squares-grid: 0.813rem;
     --bottom-submit: 1.125rem;
     --bottom-usage: 4.625rem;
     --bottom-hw-usage-div: 0.250rem;
     --bottom-card-footer-dots-grid-div: -0.750rem;
-    --bottom-uptime-squares-grid:  0.813rem;
+    --bottom-uptime-squares-grid: 0.813rem;
     --bottom-values-grid-div-p: 0.250rem;
     --bottom-project-version: 1.250rem;
     --bottom-error-div: 7.500rem;
@@ -165,7 +164,7 @@
 
     /* width */
     --width-body: 100%;
-    --width-dhtmlx-message-area 21.875rem;
+    --width-dhtmlx-message-area: 21.875rem;
     --width-setup-div: 21.875rem;
     --width-logo: 21.875rem;
     --width-logo-description: 21.875rem;

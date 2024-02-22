@@ -150,7 +150,7 @@ function chartInitialization()
         }
     };
 
-    chart = new Chart(ctx, Object.assign((html.getAttribute("theme") == "light") ? dataLight : dataDark, options));
+    chart = new Chart(ctx, Object.assign((html.getAttribute("theme") === "light") ? dataLight : dataDark, options));
 
     processorRectangle.addEventListener("click", function(event) {hideDataset(event.target || event.srcElement)});
     ramRectangle.addEventListener("click", function(event) {hideDataset(event.target || event.srcElement)});
@@ -160,7 +160,6 @@ function chartInitialization()
 /**
  * Updates datasets shifting previous values
  *
- * @param {*} datasets datasets to update
  * @param {*} usageData new data
  */
 function chartTick(usageData)
@@ -195,21 +194,21 @@ function hideDataset(element)
         {
             processorTriangle.style.animation = (chart.getDatasetMeta(0).hidden) ? "fade-in-triangle 0.5s forwards" : "fade-out-triangle 0.5s forwards";
 
-            chart.getDatasetMeta(0).hidden = (chart.getDatasetMeta(0).hidden) ? false : true;
+            chart.getDatasetMeta(0).hidden = (!chart.getDatasetMeta(0).hidden);
             break;
         }
         case "ram-rectangle":
         {
             ramTriangle.style.animation = (chart.getDatasetMeta(1).hidden) ? "fade-in-triangle 0.5s forwards" : "fade-out-triangle 0.5s forwards";
 
-            chart.getDatasetMeta(1).hidden = (chart.getDatasetMeta(1).hidden) ? false : true;
+            chart.getDatasetMeta(1).hidden = (!chart.getDatasetMeta(1).hidden);
             break;
         }
         case "storage-rectangle":
         {
             storageTriangle.style.animation = (chart.getDatasetMeta(2).hidden) ? "fade-in-triangle 0.5s forwards" : "fade-out-triangle 0.5s forwards";
 
-            chart.getDatasetMeta(2).hidden = (chart.getDatasetMeta(2).hidden) ? false : true;
+            chart.getDatasetMeta(2).hidden = (!chart.getDatasetMeta(2).hidden);
             break;
         }
     }

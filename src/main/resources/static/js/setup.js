@@ -29,7 +29,7 @@ function setupInitialization()
  */
 function changeTheme(element)
 {
-    if (String(element.id) == "light-theme")
+    if (String(element.id) === "light-theme")
     {
         html.setAttribute("theme", "light");
         setAlertStyle("light");
@@ -68,7 +68,7 @@ function changeTheme(element)
 /**
  * Changes alert style
  *
- * @param {*} style name
+ * @param styleName
  */
 function setAlertStyle(styleName)
 {
@@ -76,9 +76,9 @@ function setAlertStyle(styleName)
 
     for (let i = 0; i < links.length; i++)
     {
-        if ((links[i].getAttribute("title") == "light") || (links[i].getAttribute("title") == "dark"))
+        if ((links[i].getAttribute("title") === "light") || (links[i].getAttribute("title") === "dark"))
         {
-            links[i].disabled = (links[i].getAttribute("title") != styleName);
+            links[i].disabled = (links[i].getAttribute("title") !== styleName);
         }
     }
 }
@@ -93,9 +93,9 @@ function sendSetupRequest()
 
     setupXHR.onreadystatechange = function()
     {
-        if (this.readyState == 4)
+        if (this.readyState === 4)
         {
-            if (this.status == 200)
+            if (this.status === 200)
             {
                 submit.value = "LOADING";
                 window.location = "http://" + window.location.hostname + ":" + port.value;
@@ -120,7 +120,7 @@ function sendSetupRequest()
         "port": port.value
     }
 
-    if (port.value != 4000)
+    if (port.value !== 4000)
     {
         setupXHR.send(JSON.stringify(data));
     }

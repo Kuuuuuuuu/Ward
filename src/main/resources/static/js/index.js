@@ -59,7 +59,7 @@ function showCards()
         {
             cards[randomSequenceArray[i]].style.opacity = "1";
 
-            if (randomSequenceArray[i] == 4)
+            if (randomSequenceArray[i] === 4)
             {
                 versionLabel.style.opacity = "1";
             }
@@ -94,7 +94,7 @@ function sendUsageRequest()
 {
     usageXHR.onreadystatechange = function()
     {
-        if ((this.readyState == 4) && (this.status == 200))
+        if ((this.readyState === 4) && (this.status === 200))
         {
             let response = JSON.parse(this.response);
 
@@ -116,7 +116,7 @@ function sendInfoRequest()
 {
     infoXHR.onreadystatechange = function()
     {
-        if ((this.readyState == 4) && (this.status == 200))
+        if ((this.readyState === 4) && (this.status === 200))
         {
             let response = JSON.parse(this.response);
 
@@ -139,16 +139,16 @@ function sendInfoRequest()
 /**
  * Changes page
  *
- * @param {*} control element
+ * @param element
  */
 function changePage(element)
 {
-    if ((String(element.id) == "first-control") && (currentPage > 1))
+    if ((String(element.id) === "first-control") && (currentPage > 1))
     {
         currentPage -= 1;
         setCloudAnimation(currentPage);
     }
-    else if ((String(element.id) == "second-control") && (currentPage < 2))
+    else if ((String(element.id) === "second-control") && (currentPage < 2))
     {
         currentPage += 1;
         setCloudAnimation(currentPage);
@@ -161,7 +161,7 @@ function changePage(element)
 /**
  * Changes page visibility
  *
- * @param {*} new page
+ * @param newPage
  */
 function setPageVisibility(newPage)
 {
@@ -185,7 +185,7 @@ function setPageVisibility(newPage)
 /**
  * Animates clouds
  *
- * @param {*} new page
+ * @param newSquareScale
  */
 function setCloudAnimation(newSquareScale)
 {
@@ -209,7 +209,7 @@ function setCloudAnimation(newSquareScale)
 /**
  * Changes opacity of control
  *
- * @param {*} new page
+ * @param newSquareScale
  */
 function setControlOpacity(newSquareScale)
 {

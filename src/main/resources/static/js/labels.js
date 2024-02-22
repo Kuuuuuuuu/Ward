@@ -72,31 +72,31 @@ function formatLabels(labelArray, usageData)
         case 1:
         {
             labelArray[0].innerHTML = 0;
-            labelArray[0].style.color = (html.getAttribute("theme") == "light") ? "rgba(188, 188, 188, 1)" : "rgba(121, 121, 121, 1)";
+            labelArray[0].style.color = (html.getAttribute("theme") === "light") ? "rgba(188, 188, 188, 1)" : "rgba(121, 121, 121, 1)";
             labelArray[1].innerHTML = 0;
-            labelArray[1].style.color = (html.getAttribute("theme") == "light") ? "rgba(188, 188, 188, 1)" : "rgba(121, 121, 121, 1)";
+            labelArray[1].style.color = (html.getAttribute("theme") === "light") ? "rgba(188, 188, 188, 1)" : "rgba(121, 121, 121, 1)";
             labelArray[2].innerHTML = usageDataString[0];
-            labelArray[2].style.color = (html.getAttribute("theme") == "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
+            labelArray[2].style.color = (html.getAttribute("theme") === "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
             break;
         }
         case 2:
         {
             labelArray[0].innerHTML = 0;
-            labelArray[0].style.color = (html.getAttribute("theme") == "light") ? "rgba(188, 188, 188, 1)" : "rgba(121, 121, 121, 1)";
+            labelArray[0].style.color = (html.getAttribute("theme") === "light") ? "rgba(188, 188, 188, 1)" : "rgba(121, 121, 121, 1)";
             labelArray[1].innerHTML = usageDataString[0];
-            labelArray[1].style.color = (html.getAttribute("theme") == "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
+            labelArray[1].style.color = (html.getAttribute("theme") === "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
             labelArray[2].innerHTML = usageDataString[1];
-            labelArray[2].style.color = (html.getAttribute("theme") == "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
+            labelArray[2].style.color = (html.getAttribute("theme") === "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
             break;
         }
         default:
         {
             labelArray[0].innerHTML = usageDataString[0];
-            labelArray[0].style.color = (html.getAttribute("theme") == "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
+            labelArray[0].style.color = (html.getAttribute("theme") === "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
             labelArray[1].innerHTML = usageDataString[1];
-            labelArray[1].style.color = (html.getAttribute("theme") == "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
+            labelArray[1].style.color = (html.getAttribute("theme") === "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
             labelArray[2].innerHTML = usageDataString[2];
-            labelArray[2].style.color = (html.getAttribute("theme") == "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
+            labelArray[2].style.color = (html.getAttribute("theme") === "light") ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)";
         }
     }
 }
