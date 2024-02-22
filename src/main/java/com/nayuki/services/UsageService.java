@@ -15,7 +15,7 @@ import java.util.Arrays;
 /**
  * UsageService provides principal information of processor, RAM and storage usage to rest controller
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.3
  */
 @Service

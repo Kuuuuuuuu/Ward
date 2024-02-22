@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * IndexController displays index page of Ward application
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.2
  */
 @Controller

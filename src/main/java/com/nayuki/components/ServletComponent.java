@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * ServletComponent used for application port changing
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.3
  */
 @Component

@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * ControllerExceptionHandler is a standard exception handler for rest api, and white labels
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.0
  */
 @ControllerAdvice

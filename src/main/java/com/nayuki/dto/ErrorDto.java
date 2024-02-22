@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 /**
  * ErrorDto is a container for error response
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.1
  */
 @Getter

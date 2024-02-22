@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Size;
 /**
  * SetupDto is a values container for setup data
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.3
  */
 @Getter

@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * SetupService manipulating setup data
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.2
  */
 @Service

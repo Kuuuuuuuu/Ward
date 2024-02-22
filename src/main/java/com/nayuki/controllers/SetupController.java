@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * SetupController displays responses from rest API
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.1
  */
 @RestController

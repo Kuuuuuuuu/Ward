@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  * UtilitiesComponent provides various functions, which are used in different classes
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.2
  */
 @Component

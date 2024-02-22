@@ -6,7 +6,7 @@ import lombok.Setter;
 /**
  * MavenDto is a values container for presenting maven fields information
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.0
  */
 @Getter

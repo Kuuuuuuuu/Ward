@@ -3,7 +3,7 @@ package com.nayuki.exceptions;
 /**
  * ApplicationNotSetUpException indicates that user tried to access api, without setting up the application
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.0
  */
 public final class ApplicationNotSetUpException extends Exception {

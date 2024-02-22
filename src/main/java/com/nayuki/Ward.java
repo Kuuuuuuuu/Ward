@@ -11,7 +11,7 @@ import java.io.File;
 /**
  * Ward is a Spring Boot application class
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki, Nayuki
  * @version 1.0.4
  */
 @SpringBootApplication

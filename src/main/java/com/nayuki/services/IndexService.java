@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 /**
  * IndexService displays index page of Ward application
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.1
  */
 @Service

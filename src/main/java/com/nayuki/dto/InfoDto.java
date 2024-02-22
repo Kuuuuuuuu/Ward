@@ -6,7 +6,7 @@ import lombok.Setter;
 /**
  * InfoDto is a container for other info objects
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.1
  */
 @Getter

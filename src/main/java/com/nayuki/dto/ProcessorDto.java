@@ -6,7 +6,7 @@ import lombok.Setter;
 /**
  * ProcessorDto is a values container for presenting processor principal information
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.0
  */
 @Getter

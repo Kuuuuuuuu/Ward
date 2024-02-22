@@ -24,7 +24,7 @@ import java.util.Properties;
 /**
  * InfoService provides various information about machine, such as processor name, core count, Ram amount, etc.
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.2
  */
 @Service

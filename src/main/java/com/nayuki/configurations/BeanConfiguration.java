@@ -7,7 +7,7 @@ import oshi.SystemInfo;
 /**
  * BeanConfiguration provides bean configuration for classes, which are not components
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.2
  */
 @Configuration

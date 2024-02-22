@@ -6,7 +6,7 @@ import lombok.Setter;
 /**
  * UptimeDto is a values container for presenting uptime principal information
  *
- * @author Rudolf Barbu
+ * @author Rudolf Barbu, Nayuki
  * @version 1.0.0
  */
 @Getter
