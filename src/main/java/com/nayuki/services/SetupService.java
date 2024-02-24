@@ -3,12 +3,14 @@ package com.nayuki.services;
 import com.nayuki.Ward;
 import com.nayuki.dto.ResponseDto;
 import com.nayuki.dto.SetupDto;
+import org.ini4j.Wini;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * SetupService manipulating setup data
@@ -25,24 +27,53 @@ public class SetupService {
      * @return ResponseDto with a message
      */
     public ResponseDto postSetup(SetupDto setupDto) {
-        if (Ward.isFirstLaunch()) {
-            try {
-                File file = new File(Ward.SETUP_FILE_PATH);
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                    writer.write("[setup]\n");
-                    writer.write("serverName=" + setupDto.getServerName() + "\n");
-                    writer.write("theme=" + setupDto.getTheme() + "\n");
-                    writer.write("port=" + setupDto.getPort() + "\n");
-                } catch (IOException e) {
-                    return new ResponseDto("Error occurred while writing to setup file");
-                }
+        try {
+            File file = new File(Ward.SETUP_FILE_PATH);
 
-                Ward.restart();
-            } catch (Exception e) {
-                return new ResponseDto("An unexpected error occurred");
+            if (Ward.isFirstLaunch()) {
+                Map<String, String> setupProperties = Map.of(
+                        "serverName", setupDto.getServerName(),
+                        "theme", setupDto.getTheme(),
+                        "port", setupDto.getPort()
+                );
+
+                putInIniFile(file, setupProperties);
+
+                CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(Ward::restart);
+
+                return new ResponseDto("Settings saved correctly");
+            } else {
+                return new ResponseDto("Settings already exist");
+            }
+        } catch (IOException e) {
+            System.err.println("Error while saving settings");
+            return new ResponseDto("Error while saving settings");
+        }
+    }
+
+    /**
+     * Puts new data in ini file
+     *
+     * @param file       ini file
+     * @param properties map with properties
+     * @throws IOException if there's an issue with file operations
+     */
+    private void putInIniFile(File file, Map<String, String> properties) throws IOException {
+        if (!file.exists()) {
+            boolean isFileCreated = file.createNewFile();
+            if (!isFileCreated) {
+                throw new IOException("Error while creating setup.ini file");
             }
         }
 
-        return new ResponseDto("Settings saved correctly");
+        Wini wini = new Wini(file);
+
+        for (Map.Entry<String, String> entry : properties.entrySet()) {
+            System.out.println("[INFO] Setup data: " + entry.getKey() + " = " + entry.getValue());
+            wini.put("setup", entry.getKey(), entry.getValue());
+        }
+
+        wini.store();
+        System.out.println("[INFO] Setup data saved in setup.ini file");
     }
 }
