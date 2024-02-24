@@ -69,7 +69,6 @@ public class SetupService {
         Wini wini = new Wini(file);
 
         for (Map.Entry<String, String> entry : properties.entrySet()) {
-            System.out.println("[INFO] Setup data: " + entry.getKey() + " = " + entry.getValue());
             wini.put("setup", entry.getKey(), entry.getValue());
         }
 
