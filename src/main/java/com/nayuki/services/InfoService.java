@@ -1,10 +1,9 @@
 package com.nayuki.services;
 
 import com.nayuki.Ward;
+import com.nayuki.components.UtilitiesComponent;
 import com.nayuki.dto.*;
 import com.nayuki.exceptions.ApplicationNotSetUpException;
-import com.nayuki.components.UtilitiesComponent;
-
 import org.springframework.stereotype.Service;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -16,6 +15,7 @@ import oshi.software.os.OperatingSystem;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -177,16 +177,16 @@ public class InfoService {
      *
      * @return UptimeDto with filled fields
      */
-    @SuppressWarnings(value = "IntegerDivisionInFloatingPointContext")
     private UptimeDto getUptime() {
         UptimeDto uptimeDto = new UptimeDto();
 
         long uptimeInSeconds = systemInfo.getOperatingSystem().getSystemUptime();
+        Duration duration = Duration.ofSeconds(uptimeInSeconds);
 
-        uptimeDto.setDays(String.format("%02d", (int) Math.floor(uptimeInSeconds / 86400)));
-        uptimeDto.setHours(String.format("%02d", (int) Math.floor((uptimeInSeconds % 86400) / 3600)));
-        uptimeDto.setMinutes(String.format("%02d", (int) Math.floor((uptimeInSeconds / 60) % 60)));
-        uptimeDto.setSeconds(String.format("%02d", (int) Math.floor(uptimeInSeconds % 60)));
+        uptimeDto.setDays(String.format("%02d", duration.toDaysPart()));
+        uptimeDto.setHours(String.format("%02d", duration.toHoursPart()));
+        uptimeDto.setMinutes(String.format("%02d", duration.toMinutesPart()));
+        uptimeDto.setSeconds(String.format("%02d", duration.toSecondsPart()));
 
         return uptimeDto;
     }
@@ -210,20 +210,22 @@ public class InfoService {
      * Gets project version information
      *
      * @return MavenDto with filled field
-     * @throws IOException if file does not exist
      */
-    private ProjectDto getProject() throws IOException {
+    private ProjectDto getProject() {
         ProjectDto projectDto = new ProjectDto();
-        Properties properties = new Properties();
-        InputStream inputStream = getClass().getResourceAsStream("/META-INF/maven/org.b-software/ward/pom.properties");
 
-        if (inputStream != null) {
-            properties.load(inputStream);
-            String version = properties.getProperty("version");
-
-            projectDto.setVersion("Ward: v" + version);
-        } else {
-            projectDto.setVersion("Developer mode");
+        try (InputStream inputStream = getClass().getResourceAsStream("/META-INF/maven/com.nayuki/ward/pom.properties")) {
+            if (inputStream != null) {
+                Properties properties = new Properties();
+                properties.load(inputStream);
+                String version = properties.getProperty("version");
+                projectDto.setVersion("Ward: v" + version);
+            } else {
+                projectDto.setVersion("Developer mode");
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading version: " + e.getMessage());
+            projectDto.setVersion("Error reading version");
         }
 
         return projectDto;
