@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html id="html" theme="light" xmlns:th="http://www.thymeleaf.org">
+<html id="html" lang="en" theme="light" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
@@ -15,25 +15,17 @@
     <link rel="stylesheet" th:href="@{/css/layout.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/shadows.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/themes.css}" type="text/css"/>
-    <script th:src="@{/js/assets/dhtmlx.min.js}" type="text/javascript"></script>
-    <script th:src="@{/js/assets/three.min.js}" type="text/javascript"></script>
-    <script th:src="@{/js/assets/vanta.min.js}" type="text/javascript"></script>
-    <script th:src="@{/js/background.js}" type="text/javascript"></script>
-    <script th:src="@{/js/globals.js}" type="text/javascript"></script>
-    <script th:src="@{/js/setup.js}" type="text/javascript"></script>
-    <script th:inline="javascript" type="text/javascript"> globalsInitialization(); </script>
 </head>
 <body id="background">
-<script th:inline="javascript" type="text/javascript"> backgroundInitialization(); </script>
 <div class="container setup">
     <div class="setup-div">
         <div class="logo">WARD</div>
         <div class="logo-description">SERVER DASHBOARD</div>
         <div class="clouds">
-            <img class="first" th:src=@{/img/logo/clouds/left.png}/>
-            <img class="second" th:src=@{/img/logo/clouds/right.png}/>
+            <img alt="first-cloud" class="first" src="/img/logo/clouds/left.png"/>
+            <img alt="second-cloud" class="second" src="/img/logo/clouds/right.png"/>
         </div>
-        <img class="background" th:src=@{/img/logo/background.png}/>
+        <img alt="bg" class="background" src="/img/logo/background.png"/>
         <div class="form">
             <div class="form-squares-grid">
                 <div class="first"></div>
@@ -42,6 +34,7 @@
             </div>
             <div class="label-main-settings">MAIN SETTINGS</div>
             <div class="main-settings">
+                <label for="server-name"></label>
                 <input id="server-name" maxlength="10" placeholder="Server Name" type="text"/>
                 <div class="main-settings-underline first"></div>
             </div>
@@ -55,12 +48,19 @@
                     <input class="first" id="light-theme" type="button" value="LIGHT THEME"/>
                     <input class="second" id="dark-theme" type="button" value="DARK THEME"/>
                 </div>
+                <label for="port"></label>
                 <input class="port" id="port" maxlength="5" placeholder="Application Port" type="text"/>
             </div>
             <input class="submit" id="submit" type="button" value="LAUNCH"/>
         </div>
     </div>
 </div>
-<script th:inline="javascript" type="text/javascript"> setupInitialization(); </script>
+
+<script src="/js/assets/dhtmlx.min.js"></script>
+<script src="/js/assets/three.min.js"></script>
+<script src="/js/assets/vanta.min.js"></script>
+<script src="/js/background.js"></script>
+<script src="/js/setup.js"></script>
+
 </body>
 </html>

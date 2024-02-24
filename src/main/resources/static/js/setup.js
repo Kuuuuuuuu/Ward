@@ -1,36 +1,33 @@
-"use strict";
+const lightTheme = document.getElementById("light-theme");
+const darkTheme = document.getElementById("dark-theme");
+const submit = document.getElementById("submit");
+const lightThemeSquare = document.getElementById("light-theme-square");
+const darkThemeSquare = document.getElementById("dark-theme-square");
+const serverName = document.getElementById("server-name");
+const port = document.getElementById("port");
+
+let setupXHR = new XMLHttpRequest();
 
 /**
  * Initializes dom objects
  */
-function setupInitialization()
-{
+function setupInitialization() {
     setAlertStyle("light");
 
-    let lightTheme = document.getElementById("light-theme");
-    let darkTheme = document.getElementById("dark-theme");
-    let submit = document.getElementById("submit");
+    lightTheme.addEventListener("click", handleClick);
+    darkTheme.addEventListener("click", handleClick);
+    submit.addEventListener("click", sendSetupRequest);
 
-    lightThemeSquare = document.getElementById("light-theme-square");
-    darkThemeSquare = document.getElementById("dark-theme-square");
-
-    serverName = document.getElementById("server-name");
-    port = document.getElementById("port");
-
-    setupXHR = new XMLHttpRequest();
-
-    lightTheme.addEventListener("click", function(event) {changeTheme(event.target || event.srcElement)});
-    darkTheme.addEventListener("click", function(event) {changeTheme(event.target || event.srcElement)});
-    submit.addEventListener("click", function(event) {sendSetupRequest(event.target || event.srcElement)});
+    function handleClick(event) {
+        changeTheme(event.target);
+    }
 }
 
 /**
  * Changes theme
  */
-function changeTheme(element)
-{
-    if (String(element.id) === "light-theme")
-    {
+function changeTheme(element) {
+    if (String(element.id) === "light-theme") {
         html.setAttribute("theme", "light");
         setAlertStyle("light");
 
@@ -44,9 +41,7 @@ function changeTheme(element)
             lowlightColor: 0xE4E3EF,
             baseColor: 0xE4E3EF
         });
-    }
-    else
-    {
+    } else {
         html.setAttribute("theme", "dark");
         setAlertStyle("dark");
 
@@ -70,68 +65,53 @@ function changeTheme(element)
  *
  * @param styleName
  */
-function setAlertStyle(styleName)
-{
-    let links = document.getElementsByTagName("link");
+function setAlertStyle(styleName) {
+    const links = document.querySelectorAll('link[title="light"], link[title="dark"]');
 
-    for (let i = 0; i < links.length; i++)
-    {
-        if ((links[i].getAttribute("title") === "light") || (links[i].getAttribute("title") === "dark"))
-        {
-            links[i].disabled = (links[i].getAttribute("title") !== styleName);
-        }
-    }
+    links.forEach(link => {
+        link.disabled = (link.getAttribute("title") !== styleName);
+    });
 }
 
 /**
  * Sends settings request
  */
-function sendSetupRequest()
-{
+function sendSetupRequest() {
     setupXHR.open("POST", "/api/setup");
     setupXHR.setRequestHeader("Content-Type", "application/json");
 
-    setupXHR.onreadystatechange = function()
-    {
-        if (this.readyState === 4)
-        {
-            if (this.status === 200)
-            {
-                submit.value = "LOADING";
-                window.location = "http://" + window.location.hostname + ":" + port.value;
-            }
-            else
-            {
-                let message =
-                {
-                    text: "Fill the form correctly",
-                    type: ("")
-                }
-
-                dhtmlx.message(message);
-            }
+    setupXHR.onreadystatechange = () => {
+        if (this.readyState !== 4) {
+            return;
         }
-    }
 
-    let data =
-    {
-        "serverName": serverName.value,
-        "theme": html.getAttribute("theme"),
-        "port": port.value
-    }
+        if (this.status === 200) {
+            submit.value = "LOADING";
+            window.location = `http://${window.location.hostname}:${port.value}`;
+        } else {
+            const message = {
+                text: this.responseText,
+                type: ""
+            };
 
-    if (port.value !== 4000)
-    {
-        setupXHR.send(JSON.stringify(data));
-    }
-    else
-    {
-        let message =
-        {
-            text: "Choose other port",
-            type: ("")
+            dhtmlx.message(message);
         }
+    };
+
+    if (port.value !== "8080" && port.value !== "80") {
+        setupXHR.send({
+            serverName: serverName.value,
+            theme: html.getAttribute("theme"),
+            port: port.value
+        });
+    } else {
+        const message = {
+            text: "Choose another port",
+            type: ""
+        };
 
         dhtmlx.message(message);
     }
 }
+
+setupInitialization();
