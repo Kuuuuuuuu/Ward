@@ -1,37 +1,33 @@
-<h3 align="center">
-    <img src="images/logo.png" alt="Logo" width="150" height="150"/>
-</h3>
-
 ---
 
-### About
+## About
 
-Ward is a simple and minimalistic server monitoring tool. Ward supports adaptive design system. Also, it supports dark theme.
-It shows only principal information and can be used, if you want to see nice looking dashboard instead looking on bunch of numbers and graphs.
-Ward works nice on all popular operating systems, because it uses [OSHI](https://github.com/oshi/oshi).
+Ward is a sleek and minimalistic server monitoring tool designed with an adaptive design system and dark theme support. It focuses on presenting essential information, offering a visually appealing dashboard instead of overwhelming users with an array of numbers and graphs. Ward is compatible with popular operating systems, ensuring a seamless experience by utilizing [OSHI](https://github.com/oshi/oshi).
 
-**All features tested on:** `Windows` `Linux`
+**Tested on:** `Windows` `Linux`
 
-<p align = "center">
-    <img src = "images/preview.png" alt = "Preview Image" />
+<p align="center">
+    <img src="images/preview.png" alt="Preview Image" />
 </p>
 
-<h6 align = "center">Preview Image</h6>
+<h6 align="center">Preview Image</h6>
 
 ---
 
-### Installation
+## Installation
 
-    Create your own .jar
+**Create your own .jar:**
 
-    • Clone the project
-    • Import project in your IDE as Maven project
-    • mvn clean package
+- Clone the project
+- Import the project into your IDE as a Maven project
+- Run `mvn clean package`
 
 <br>
 
-    Run .jar file
+**Run .jar file:**
 
-    • Download latest .jar from releases section
-    • Execute jar on Windows or Linux with administrative rights
-    • Enter localhost:4000 and set up application
+- Download the latest .jar from the [releases section](https://github.com/Rudolf-Barbu/Ward/releases)
+- Execute the jar on Windows or Linux with administrative rights
+- Open your browser and navigate to `localhost:4000` to set up the application
+
+**Original Repo:** [https://github.com/Rudolf-Barbu/Ward](https://github.com/Rudolf-Barbu/Ward)
