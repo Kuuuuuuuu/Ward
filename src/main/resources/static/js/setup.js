@@ -19,6 +19,16 @@ function setupInitialization() {
     lightTheme.addEventListener("click", changeTheme);
     darkTheme.addEventListener("click", changeTheme);
     submit.addEventListener("click", sendSetupRequest);
+
+    port.addEventListener("input", () => {
+        port.value = port.value.replace(/\D/g, '');
+
+        if (port.value.length > 5) {
+            port.value = port.value.slice(0, 5);
+        } else if (port.value > 65535) {
+            port.value = 65535;
+        }
+    });
 }
 
 /**
