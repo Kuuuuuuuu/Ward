@@ -23,11 +23,6 @@ public class Ward extends SpringBootServletInitializer {
     public static final String SETUP_FILE_PATH = "setup.ini";
 
     /**
-     * Constant for determining initial application port
-     */
-    public static final int INITIAL_PORT = 4000;
-
-    /**
      * Holder for determine first launch of application
      */
     @Getter

@@ -33,16 +33,17 @@ public class ServletComponent implements WebServerFactoryCustomizer<TomcatServle
      */
     @Override
     public void customize(TomcatServletWebServerFactory tomcatServletWebServerFactory) {
-        if (!Ward.isFirstLaunch()) {
-            try {
-                File file = new File(Ward.SETUP_FILE_PATH);
-                int port = Integer.parseInt(utilitiesComponent.getFromIniFile(file, "setup", "port"));
-                tomcatServletWebServerFactory.setPort(port);
-            } catch (IOException | NumberFormatException exception) {
-                System.out.println("Error: " + exception.getMessage());
+        try {
+            String port = utilitiesComponent.getFromIniFile(new File(Ward.SETUP_FILE_PATH), "setup", "port");
+            if (port != null) {
+                tomcatServletWebServerFactory.setPort(Integer.parseInt(port));
+                System.out.println("[INFO] Port found in setup.ini file. Using port " + port);
+            } else {
+                tomcatServletWebServerFactory.setPort(8080);
+                System.out.println("[WARN] Port not found in setup.ini file. Using default port 8080");
             }
-        } else {
-            tomcatServletWebServerFactory.setPort(Ward.INITIAL_PORT);
+        } catch (IOException e) {
+            System.out.println("Error while reading setup.ini file");
         }
     }
 }
