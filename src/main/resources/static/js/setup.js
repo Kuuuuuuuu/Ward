@@ -16,20 +16,9 @@ let setupXHR = new XMLHttpRequest();
 function setupInitialization() {
     setAlertStyle("light");
 
-    lightTheme.addEventListener("click", handleClick);
-    darkTheme.addEventListener("click", handleClick);
+    lightTheme.addEventListener("click", changeTheme);
+    darkTheme.addEventListener("click", changeTheme);
     submit.addEventListener("click", sendSetupRequest);
-
-    port.addEventListener("input", () => {
-        port.value = port.value.replace(/\D/g, ""); // Removes non-numeric characters
-        if (port.length > 5) {
-            port.value = port.value.slice(0, 5);
-        }
-    });
-
-    function handleClick(event) {
-        changeTheme(event.target);
-    }
 }
 
 /**
