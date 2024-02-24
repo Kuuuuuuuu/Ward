@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * MachineDto is a values container for presenting machine principal information
+ * MachineDto is a value container for presenting machine principal information
  *
  * @author Rudolf Barbu, Nayuki
  * @version 1.0.0
@@ -31,4 +31,14 @@ public class MachineDto {
      * Processes count field
      */
     private String procCount;
+
+    /**
+     * Threads count field
+     */
+    private String threadCount;
+
+    /**
+     * Network info field
+     */
+    private String networkInfo;
 }

@@ -6,10 +6,7 @@ import com.nayuki.dto.*;
 import com.nayuki.exceptions.ApplicationNotSetUpException;
 import org.springframework.stereotype.Service;
 import oshi.SystemInfo;
-import oshi.hardware.CentralProcessor;
-import oshi.hardware.GlobalMemory;
-import oshi.hardware.HWDiskStore;
-import oshi.hardware.PhysicalMemory;
+import oshi.hardware.*;
 import oshi.software.os.OperatingSystem;
 
 import java.io.File;
@@ -120,6 +117,17 @@ public class InfoService {
         OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
         OperatingSystem.OSVersionInfo osVersionInfo = operatingSystem.getVersionInfo();
         GlobalMemory globalMemory = systemInfo.getHardware().getMemory();
+
+        int threadCount = operatingSystem.getThreadCount();
+        machineDto.setThreadCount(String.format("%d %s", threadCount, (threadCount > 1) ? "Threads" : "Thread"));
+
+        // network info
+        NetworkIF[] networkIFs = systemInfo.getHardware().getNetworkIFs().toArray(new NetworkIF[0]);
+        StringBuilder networkInfo = new StringBuilder();
+        for (NetworkIF networkIF : networkIFs) {
+            networkInfo.append(networkIF.getName()).append(": ").append(Arrays.toString(networkIF.getIPv4addr())).append("\n");
+        }
+        machineDto.setNetworkInfo(networkInfo.toString());
 
         machineDto.setOperatingSystem(String.format("%s %s, %s", operatingSystem.getFamily(), osVersionInfo.getVersion(), osVersionInfo.getCodeName()));
         machineDto.setTotalRam(String.format("%s Ram", getConvertedCapacity(globalMemory.getTotal())));
