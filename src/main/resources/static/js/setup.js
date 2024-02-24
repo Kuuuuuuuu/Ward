@@ -1,3 +1,5 @@
+"use strict";
+
 const lightTheme = document.getElementById("light-theme");
 const darkTheme = document.getElementById("dark-theme");
 const submit = document.getElementById("submit");
@@ -80,37 +82,31 @@ function sendSetupRequest() {
     setupXHR.open("POST", "/api/setup");
     setupXHR.setRequestHeader("Content-Type", "application/json");
 
-    setupXHR.onreadystatechange = () => {
-        if (this.readyState !== 4) {
-            return;
+    setupXHR.onreadystatechange = function () {
+        if (this.readyState === 4) {
+            if (this.status === 200) {
+                submit.value = "LOADING";
+                window.location = "http://" + window.location.hostname + ":" + port.value;
+            } else {
+                dhtmlx.message({
+                    text: "Fill the form correctly",
+                    type: ("")
+                });
+            }
         }
+    }
 
-        if (this.status === 200) {
-            submit.value = "LOADING";
-            window.location = `http://${window.location.hostname}:${port.value}`;
-        } else {
-            const message = {
-                text: this.responseText,
-                type: ""
-            };
-
-            dhtmlx.message(message);
-        }
-    };
-
-    if (port.value !== "8080" && port.value !== "80") {
-        setupXHR.send({
-            serverName: serverName.value,
-            theme: html.getAttribute("theme"),
-            port: port.value
-        });
+    if (port.value !== 8080 && port.value !== 80) {
+        setupXHR.send(JSON.stringify({
+            "serverName": serverName.value,
+            "theme": html.getAttribute("theme"),
+            "port": port.value
+        }));
     } else {
-        const message = {
-            text: "Choose another port",
-            type: ""
-        };
-
-        dhtmlx.message(message);
+        dhtmlx.message({
+            text: "Choose other port",
+            type: ("")
+        });
     }
 }
 

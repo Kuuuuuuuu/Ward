@@ -1,3 +1,5 @@
+"use strict";
+
 const processorLabels = [
     document.getElementById("processor-hundreds"),
     document.getElementById("processor-tens"),
@@ -37,7 +39,6 @@ function labelsTick(usageData) {
  * @param usageData usage data
  */
 function formatLabels(labelArray, usageData) {
-    const html = document.getElementsByTagName("html")[0];
     const theme = html.getAttribute("theme") === "light" ? "light" : "dark";
     const usageDataString = String(usageData).padStart(3, '0');
 

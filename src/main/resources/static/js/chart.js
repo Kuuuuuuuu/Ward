@@ -1,3 +1,5 @@
+"use strict";
+
 const processorTriangle = document.getElementById("processor-triangle");
 const ramTriangle = document.getElementById("ram-triangle");
 const storageTriangle = document.getElementById("storage-triangle");
@@ -59,7 +61,6 @@ function chartInitialization() {
         },
     };
 
-    const html = document.getElementsByTagName("html")[0];
     chartElement = new Chart(ctx, Object.assign(html.getAttribute("theme") === "light" ? dataLight : dataDark, options));
 
     [processorRectangle, ramRectangle, storageRectangle].forEach((element) => {

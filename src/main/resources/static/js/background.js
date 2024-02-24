@@ -1,3 +1,5 @@
+"use strict";
+
 function backgroundInitialization() {
     const html = document.getElementsByTagName("html")[0];
     const theme = html.getAttribute("theme");

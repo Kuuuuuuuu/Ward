@@ -13,6 +13,8 @@ const hours = document.getElementById("uptime-hours");
 const minutes = document.getElementById("uptime-minutes");
 const seconds = document.getElementById("uptime-seconds");
 
+const html = document.getElementsByTagName("html")[0];
+
 let usageXHR = new XMLHttpRequest();
 let infoXHR = new XMLHttpRequest();
 
@@ -104,15 +106,15 @@ function sendInfoRequest() {
         if ((this.readyState === 4) && (this.status === 200)) {
             let response = JSON.parse(this.response);
 
-            currentClockSpeed.innerHTML = response.processor.clockSpeed;
-            currentProcCount.innerHTML = response.machine.procCount;
-            currentTotalStorage.innerHTML = response.storage.total;
-            currentDiskCount.innerHTML = response.storage.diskCount;
+            currentClockSpeed.textContent = response.processor.clockSpeed;
+            currentProcCount.textContent = response.machine.procCount;
+            currentTotalStorage.textContent = response.storage.total;
+            currentDiskCount.textContent = response.storage.diskCount;
 
-            days.innerHTML = response.uptime.days;
-            hours.innerHTML = response.uptime.hours;
-            minutes.innerHTML = response.uptime.minutes;
-            seconds.innerHTML = response.uptime.seconds;
+            days.textContent = response.uptime.days;
+            hours.textContent = response.uptime.hours;
+            minutes.textContent = response.uptime.minutes;
+            seconds.textContent = response.uptime.seconds;
         }
     }
 
