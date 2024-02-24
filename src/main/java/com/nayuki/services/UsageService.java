@@ -1,8 +1,8 @@
 package com.nayuki.services;
 
 import com.nayuki.Ward;
-import com.nayuki.exceptions.ApplicationNotSetUpException;
 import com.nayuki.dto.UsageDto;
+import com.nayuki.exceptions.ApplicationNotSetUpException;
 import org.springframework.stereotype.Service;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -10,6 +10,7 @@ import oshi.hardware.GlobalMemory;
 import oshi.software.os.FileSystem;
 import oshi.software.os.OSFileStore;
 import oshi.util.Util;
+
 import java.util.Arrays;
 
 /**
@@ -19,8 +20,7 @@ import java.util.Arrays;
  * @version 1.0.3
  */
 @Service
-public class UsageService
-{
+public class UsageService {
     /**
      * Autowired SystemInfo object
      * Used for getting usage information
@@ -36,8 +36,7 @@ public class UsageService
      *
      * @return int that display processor usage
      */
-    private int getProcessor()
-    {
+    private int getProcessor() {
         CentralProcessor centralProcessor = systemInfo.getHardware().getProcessor();
 
         long[] prevTicksArray = centralProcessor.getSystemCpuLoadTicks();
@@ -58,8 +57,7 @@ public class UsageService
      *
      * @return int that display ram usage
      */
-    private int getRam()
-    {
+    private int getRam() {
         GlobalMemory globalMemory = systemInfo.getHardware().getMemory();
 
         long totalMemory = globalMemory.getTotal();
@@ -73,8 +71,7 @@ public class UsageService
      *
      * @return int that display storage usage
      */
-    private int getStorage()
-    {
+    private int getStorage() {
         FileSystem fileSystem = systemInfo.getOperatingSystem().getFileSystem();
 
         long totalStorage = fileSystem.getFileStores().stream().mapToLong(OSFileStore::getTotalSpace).sum();
@@ -88,10 +85,8 @@ public class UsageService
      *
      * @return ResponseEntityWrapperAsset filled with usageDto
      */
-    public UsageDto getUsage() throws ApplicationNotSetUpException
-    {
-        if (!Ward.isFirstLaunch())
-        {
+    public UsageDto getUsage() throws ApplicationNotSetUpException {
+        if (!Ward.isFirstLaunch()) {
             UsageDto usageDto = new UsageDto();
 
             usageDto.setProcessor(getProcessor());
@@ -99,9 +94,7 @@ public class UsageService
             usageDto.setStorage(getStorage());
 
             return usageDto;
-        }
-        else
-        {
+        } else {
             throw new ApplicationNotSetUpException();
         }
     }

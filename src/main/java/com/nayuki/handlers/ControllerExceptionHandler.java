@@ -1,8 +1,8 @@
 package com.nayuki.handlers;
 
-import com.nayuki.exceptions.ApplicationNotSetUpException;
 import com.nayuki.components.UtilitiesComponent;
 import com.nayuki.dto.ErrorDto;
+import com.nayuki.exceptions.ApplicationNotSetUpException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -52,19 +52,15 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(new ErrorDto(methodArgumentNotValidException), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    // 404 error
-    @ExceptionHandler(value = Exception.class)
-    public String notFoundExceptionHandler(Model model) throws IOException {
+    // IDK how this works, but it does lol
+    @ExceptionHandler(value = {Exception.class, IOException.class})
+    public String handleException(Model model, Exception exception) throws IOException {
         model.addAttribute("theme", utilitiesComponent.getThemeName());
 
-        return "error/404";
-    }
-
-    // 500 error
-    @ExceptionHandler(value = IOException.class)
-    public String internalServerErrorExceptionHandler(Model model) throws IOException {
-        model.addAttribute("theme", utilitiesComponent.getThemeName());
-
-        return "error/500";
+        if (exception instanceof IOException) {
+            return "error/500";
+        } else {
+            return "error/404";
+        }
     }
 }

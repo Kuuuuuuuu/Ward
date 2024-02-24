@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+
 import java.io.File;
 
 /**
@@ -15,8 +16,7 @@ import java.io.File;
  * @version 1.0.4
  */
 @SpringBootApplication
-public class Ward extends SpringBootServletInitializer
-{
+public class Ward extends SpringBootServletInitializer {
     /**
      * Constant for determine settings file name
      */
@@ -43,14 +43,12 @@ public class Ward extends SpringBootServletInitializer
      *
      * @param args Spring Boot application arguments
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         isFirstLaunch = true;
         configurableApplicationContext = SpringApplication.run(Ward.class, args);
 
         File setupFile = new File(Ward.SETUP_FILE_PATH);
-        if (setupFile.exists())
-        {
+        if (setupFile.exists()) {
             restart();
         }
     }
@@ -58,18 +56,16 @@ public class Ward extends SpringBootServletInitializer
     /**
      * Restarts application
      */
-    public static void restart()
-    {
+    public static void restart() {
         isFirstLaunch = false;
         ApplicationArguments args = configurableApplicationContext.getBean(ApplicationArguments.class);
 
-        Thread thread = new Thread(() ->
-        {
+        Thread restartThread = new Thread(() -> {
             configurableApplicationContext.close();
-            configurableApplicationContext = SpringApplication.run(Ward.class, args.getSourceArgs());
+            configurableApplicationContext = new SpringApplication(Ward.class).run(args.getSourceArgs());
         });
 
-        thread.setDaemon(false);
-        thread.start();
+        restartThread.setDaemon(false);
+        restartThread.start();
     }
 }

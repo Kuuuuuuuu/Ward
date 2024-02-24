@@ -5,6 +5,7 @@ import com.nayuki.dto.ResponseDto;
 import com.nayuki.dto.SetupDto;
 import org.ini4j.Ini;
 import org.springframework.stereotype.Service;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -15,19 +16,17 @@ import java.io.IOException;
  * @version 1.0.2
  */
 @Service
-public class SetupService
-{
+public class SetupService {
     /**
      * Puts new data in ini file
      *
-     * @param file ini file
+     * @param file        ini file
      * @param sectionName section in ini file
-     * @param optionName option in section
+     * @param optionName  option in section
      * @throws IOException if file does not exist
      */
     @SuppressWarnings(value = {"ResultOfMethodCallIgnored", "SameParameterValue"})
-    private void putInIniFile(File file, String sectionName, String optionName, String value) throws IOException
-    {
+    private void putInIniFile(File file, String sectionName, String optionName, String value) throws IOException {
         file.createNewFile();
         Ini ini = new Ini(file);
 
@@ -43,10 +42,8 @@ public class SetupService
      * @return ResponseEntityWrapperAsset filled with ResponseDto
      * @throws Exception IoException if file is fot found, and cant be created
      */
-    public ResponseDto postSetup(SetupDto setupDto) throws Exception
-    {
-        if (Ward.isFirstLaunch())
-        {
+    public ResponseDto postSetup(SetupDto setupDto) throws Exception {
+        if (Ward.isFirstLaunch()) {
             File file = new File(Ward.SETUP_FILE_PATH);
 
             putInIniFile(file, "setup", "serverName", setupDto.getServerName());

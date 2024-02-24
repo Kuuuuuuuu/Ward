@@ -12,8 +12,7 @@ import org.springframework.ui.Model;
  * @version 1.0.1
  */
 @Service
-public class IndexService
-{
+public class IndexService {
     /**
      * Autowired InfoService object
      * Used for getting machine information for html template
@@ -37,10 +36,8 @@ public class IndexService
      * @param model strings container
      * @return template name
      */
-    public String getIndex(Model model) throws Exception
-    {
-        if (Ward.isFirstLaunch())
-        {
+    public String getIndex(Model model) throws Exception {
+        if (Ward.isFirstLaunch()) {
             return "setup";
         }
 
