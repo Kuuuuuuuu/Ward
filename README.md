@@ -30,4 +30,4 @@ Ward is a sleek and minimalistic server monitoring tool designed with an adaptiv
 
 - Download the latest .jar from the [releases section](https://github.com/Rudolf-Barbu/Ward/releases)
 - Execute the jar on Windows or Linux with administrative rights
-- Open your browser and navigate to `localhost:4000` to set up the application
+- Open your browser and navigate to `localhost:8080` to set up the application
